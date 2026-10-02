@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand-burgundy: #4a1728;
+    --brand-rose: #8e4057;
+    --brand-gold: #d8b98a;
+    --brand-ivory: #faf7f2;
+    --brand-blush: #e8cdd2;
+    --brand-charcoal: #292426;
+  }
+
+  body {
+    background-color: var(--brand-ivory);
+    color: var(--brand-charcoal);
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif), Georgia, serif;
+  }
+}
+
+/* Custom Tailwind v4 Theme Variables & Aliases */
+@theme {
+  --color-brand-burgundy: #4a1728;
+  --color-brand-rose: #8e4057;
+  --color-brand-gold: #d8b98a;
+  --color-brand-ivory: #faf7f2;
+  --color-brand-blush: #e8cdd2;
+  --color-brand-charcoal: #292426;
+
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+}

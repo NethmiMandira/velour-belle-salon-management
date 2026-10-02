@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Salon Management
+
+Velour Belle is a salon management dashboard and public salon experience built with Next.js, React, TypeScript, Tailwind CSS, and Lucide icons. It provides operational screens for appointments, customers, services, staff, gallery content, invoices, reports, and reviews, plus a client-facing home page with booking, services, team, gallery, reviews, and contact sections.
+
+## Requirements
+
+- Node.js 20 or newer
+- npm
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies and start the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev       # Start the development server
+npm run lint      # Run ESLint
+npm run build     # Create a production build
+npm run start     # Start the production server
+```
 
-## Learn More
+## Main Routes
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Purpose |
+| --- | --- |
+| `/` | Public landing page |
+| `/dashboard` | Revenue, appointment, quick access, and upcoming appointment overview |
+| `/appointments` | Search, filter, create, edit, and delete appointments |
+| `/appointmentCalender` | Month, week, and day calendar views |
+| `/customers` | Create, edit, and delete customer records |
+| `/salonServices` | Manage salon services and service categories |
+| `/teamMembers` | Manage stylists and staff roles |
+| `/gallery` | Manage gallery items, categories, and publish state |
+| `/invoiceGenerating` | Build, discount, settle, and print invoices |
+| `/reportGenerating` | Generate appointment, revenue, service, employee, and customer reports |
+| `/reviews` | Search, sort, publish, unpublish, and delete reviews |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The public home page uses anchored tabs for `Home`, `About`, `Services`, `Team`, `Gallery`, `Reviews`, and `Contact`. The `Book now` action opens the appointment request section on the same page.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The admin pages share the `Navbar`, `PageTitle`, `Container`, form controls, buttons, cards, and the Velour Belle rose, burgundy, gold, and ivory design system.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+src/
+  app/
+    (admin)/             Admin dashboard routes
+    (client)/            Client route group and shared client layout
+    page.tsx              Public salon experience
+    globals.css          Global Tailwind and brand tokens
+    layout.tsx           Root fonts, metadata, and document shell
+  components/
+    admin/               Shared admin navigation and UI controls
+    client/              Client-facing cards, navigation, footer, and booking form
+    ui/                  Generic UI primitives
+  data/
+    client-content.ts     Public services, team, gallery, and review data
+  types/
+    admin.ts              Shared admin domain models
+    client.ts             Shared public client models
+  public/images/         Background and static image assets
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Current Data Model
+
+The current screens use local mock data and React state. Changes are session-local and reset when the page is refreshed. Public content is stored in `src/data/client-content.ts`, while shared models are stored in `src/types/admin.ts` and `src/types/client.ts`. There is no database, authentication, API layer, or persistence layer connected yet.
+
+The invoice screen includes:
+
+- Appointment and customer selection
+- Add/remove services
+- Per-service discounts
+- Additional percentage discount
+- Payment method and paid amount validation
+- Automatic balance calculation using `paid amount - net payable`
+- Printable A4 invoice output
+
+The report screen includes local report previews and CSV export based on its sample data.
+
+The public client experience includes:
+
+- Service menu with prices, durations, and categories
+- Team member profiles
+- Gallery showcase cards using image assets and Unsplash imagery
+- Customer review cards with ratings
+- Appointment request form with client-side confirmation state
+- Contact details and salon information
+
+## Styling and Components
+
+- Fonts are loaded in `src/app/layout.tsx` using `next/font`.
+- Brand color aliases are defined in `src/app/globals.css`.
+- Shared admin controls live under `src/components/admin`.
+- Use existing shared components before creating new controls or page-level styling.
+- Keep route pages client components when they need local state or browser interactions.
+
+## Known Limitations
+
+- Data is sample data only and is not persisted.
+- Generate, export, and print actions are client-side demonstrations.
+- Real authentication, permissions, database storage, and server-side report generation still need to be connected.
+- Some team and gallery images use Unsplash URLs and require network access; local assets should be preferred for production.
+
+## Next Development Steps
+
+1. Add a database and API layer for customers, services, appointments, payments, invoices, and reports.
+2. Replace page-local sample arrays with server-backed data fetching and mutations.
+3. Add authentication and role-based access for salon staff.
+4. Add automated tests for invoice calculations, report filters, and appointment workflows.
