@@ -61,6 +61,7 @@ export function Navbar({
 }: NavbarProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const previousPathnameRef = React.useRef(pathname);
 
   // Scroll Container Ref & Arrow Visibility State
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -99,7 +100,9 @@ export function Navbar({
 
   // Close mobile drawer when route changes
   React.useEffect(() => {
-    if (!isMenuOpen) return;
+    const routeChanged = previousPathnameRef.current !== pathname;
+    previousPathnameRef.current = pathname;
+    if (!routeChanged || !isMenuOpen) return;
 
     const frame = window.requestAnimationFrame(() => setIsMenuOpen(false));
     return () => window.cancelAnimationFrame(frame);

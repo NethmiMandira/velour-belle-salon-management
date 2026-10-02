@@ -18,6 +18,9 @@ const body = DM_Sans({ subsets: ["latin"], display: "swap" });
 
 const categories = Array.from(new Set(clientServices.map((service) => service.category)));
 
+// Sri Lankan Rupees, e.g. 4500 -> "LKR 4,500"
+const formatLkr = (amount: number | string) => `LKR ${Number(amount).toLocaleString("en-US")}`;
+
 export default function HomePage() {
   return (
     <div className={`${body.className} min-h-screen scroll-smooth bg-brand-ivory text-brand-charcoal antialiased selection:bg-brand-rose selection:text-white`}>
@@ -130,8 +133,8 @@ export default function HomePage() {
                     >
                       {service.category}
                     </span>
-                    <span className={`${display.className} text-2xl font-semibold ${featured ? "text-brand-gold" : "text-brand-burgundy"}`}>
-                      ${service.price}
+                    <span className={`${display.className} whitespace-nowrap text-xl font-semibold ${featured ? "text-brand-gold" : "text-brand-burgundy"}`}>
+                      {formatLkr(service.price)}
                     </span>
                   </div>
                   <h3

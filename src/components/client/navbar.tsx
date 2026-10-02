@@ -24,7 +24,7 @@ export default function Navbar() {
         </Link>
         <nav className="hidden items-center gap-5 text-xs font-medium text-brand-charcoal/75 lg:flex">
           {links.map(([label, href]) => <Link key={href} href={href} className="transition-colors hover:text-brand-burgundy">{label}</Link>)}
-          <Link href="/dashboard" className="inline-flex items-center gap-1.5 text-brand-rose transition-colors hover:text-brand-burgundy"><LayoutDashboard className="h-3.5 w-3.5" /> Admin</Link>
+          <Link href="/dashboard" className="inline-flex items-center gap-1.5 rounded-xl border border-brand-blush bg-brand-blush/20 px-3 py-2 text-brand-burgundy transition-colors hover:border-brand-rose hover:bg-brand-blush/40"><LayoutDashboard className="h-3.5 w-3.5 text-brand-rose" /> Admin</Link>
         </nav>
         <div className="flex items-center gap-2">
           <Link href="/#book" className="inline-flex items-center gap-1.5 rounded-xl bg-brand-burgundy px-3 py-2 text-[11px] font-semibold text-white shadow-sm transition-colors hover:bg-brand-rose sm:gap-2 sm:px-3.5 sm:text-xs">
