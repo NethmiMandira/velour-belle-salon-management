@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Salon Management
 
 Velour Belle is a salon management dashboard and public salon experience built with Next.js, React, TypeScript, Tailwind CSS, and Lucide icons. It provides operational screens for appointments, customers, services, staff, gallery content, invoices, reports, and reviews, plus a client-facing home page with booking, services, team, gallery, reviews, and contact sections.
@@ -115,3 +116,7 @@ The public client experience includes:
 2. Replace page-local sample arrays with server-backed data fetching and mutations.
 3. Add authentication and role-based access for salon staff.
 4. Add automated tests for invoice calculations, report filters, and appointment workflows.
+=======
+# velour-belle-salon-management
+Frontend salon management platform built with Next.js, React, TypeScript, Tailwind CSS, and Lucide React.
+>>>>>>> 485d2ef28168c6adb9b216aa3cf62c9badccd3ea
