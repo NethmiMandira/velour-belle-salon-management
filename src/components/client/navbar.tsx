@@ -108,7 +108,7 @@ export default function Navbar() {
           </ul>
           <div className="mt-4 grid grid-cols-2 gap-3">
             <Link
-              href="/admin"
+              href="/dashboard"
               onClick={close}
               className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-brand-burgundy/15 px-4 py-3 text-sm font-semibold text-brand-burgundy"
             >
