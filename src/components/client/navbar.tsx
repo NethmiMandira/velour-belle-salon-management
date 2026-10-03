@@ -65,7 +65,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/admin"
+            href="/dashboard"
             className="hidden items-center gap-2 rounded-xl border-2 border-brand-burgundy/15 px-4 py-2 text-sm font-semibold text-brand-burgundy transition-all hover:border-brand-burgundy hover:bg-brand-burgundy hover:text-brand-ivory sm:inline-flex"
           >
             <LayoutDashboard className="h-4 w-4" />

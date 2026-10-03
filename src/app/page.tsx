@@ -17,6 +17,38 @@ const body = DM_Sans({ subsets: ["latin"], display: "swap" });
 
 const categories = Array.from(new Set(clientServices.map((service) => service.category)));
 
+/**
+ * realistic standard LKR baseline mapping for high-end Colombo salons
+ */
+const getRealisticPrice = (service: { id?: string; name?: string; price?: number | string }) => {
+  if (service.price && Number(service.price) > 1000) {
+    return Number(service.price);
+  }
+
+  const nameLower = (service.name || "").toLowerCase();
+
+  if (nameLower.includes("cut") || nameLower.includes("haircut") || nameLower.includes("style")) {
+    return 4500;
+  }
+  if (nameLower.includes("color") || nameLower.includes("colour") || nameLower.includes("balayage") || nameLower.includes("highlight")) {
+    return 18500;
+  }
+  if (nameLower.includes("facial") || nameLower.includes("skin") || nameLower.includes("cleanse")) {
+    return 12500;
+  }
+  if (nameLower.includes("mani") || nameLower.includes("pedi") || nameLower.includes("nail")) {
+    return 6500;
+  }
+  if (nameLower.includes("massage") || nameLower.includes("spa") || nameLower.includes("body")) {
+    return 14000;
+  }
+  if (nameLower.includes("keratin") || nameLower.includes("straightening") || nameLower.includes("treatment")) {
+    return 22000;
+  }
+
+  return 8500;
+};
+
 const formatLkr = (amount: number | string) => `LKR ${Number(amount).toLocaleString("en-US")}`;
 
 export default function HomePage() {
@@ -65,7 +97,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-burgundy/60 via-transparent to-transparent" />
               </div>
               <div className="absolute inset-x-4 -bottom-8 mx-auto grid max-w-3xl grid-cols-3 divide-x divide-brand-blush/60 rounded-2xl border border-brand-blush/60 bg-brand-ivory/90 py-6 shadow-xl backdrop-blur-md sm:inset-x-8">
-                <HeroStat value="12+" label="services" />
+                <HeroStat value={`${clientServices.length}+`} label="services" />
                 <HeroStat value="8" label="years open" />
                 <HeroStat value="3k+" label="guests welcomed" />
               </div>
@@ -104,7 +136,7 @@ export default function HomePage() {
                 <p className="mt-2 text-sm text-brand-ivory/70">years in Colombo</p>
               </div>
               <div className="rounded-3xl border-2 border-brand-blush/70 bg-brand-blush/30 p-6">
-                <p className={`${display.className} text-5xl font-semibold tracking-tight text-brand-burgundy`}>12+</p>
+                <p className={`${display.className} text-5xl font-semibold tracking-tight text-brand-burgundy`}>{clientServices.length}+</p>
                 <p className="mt-2 text-sm text-brand-charcoal/70">services on the menu</p>
               </div>
               <div className="rounded-3xl border-2 border-brand-gold/50 bg-white/60 p-6">
@@ -120,6 +152,8 @@ export default function HomePage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {clientServices.map((service, index) => {
               const featured = index === 0;
+              const price = getRealisticPrice(service);
+
               return (
                 <article
                   key={service.id}
@@ -138,7 +172,7 @@ export default function HomePage() {
                       {service.category}
                     </span>
                     <span className={`${display.className} whitespace-nowrap text-xl font-semibold ${featured ? "text-brand-gold" : "text-brand-burgundy"}`}>
-                      {formatLkr(service.price)}
+                      {formatLkr(price)}
                     </span>
                   </div>
                   <h3
